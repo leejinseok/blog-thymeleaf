@@ -31,4 +31,11 @@ public class User {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    public static User create(String username, String password) {
+        User user = new User();
+        user.username = username;
+        user.password = password;
+        return user;
+    }
 }

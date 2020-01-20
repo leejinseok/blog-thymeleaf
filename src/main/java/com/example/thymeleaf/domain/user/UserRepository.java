@@ -10,4 +10,9 @@ import javax.persistence.EntityManager;
 public class UserRepository {
 
     private final EntityManager em;
+
+    public User save(User user) {
+        em.persist(user);
+        return user;
+    }
 }

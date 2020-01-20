@@ -1,11 +1,11 @@
-package com.example.thymeleaf.form;
+package com.example.thymeleaf.dto;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
 @Data
-public class RegisterForm {
+public class UserRequestDto {
 
     @NotNull
     private String username;
