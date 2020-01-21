@@ -22,7 +22,7 @@ public class AuthController {
 
     @GetMapping("/register")
     public String getRegister() {
-        return "/auth/register";
+        return "auth/register";
     }
 
     @PostMapping("/register")
