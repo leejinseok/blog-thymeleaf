@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Layout page</title>
+        <title>위메이크 커뮤니티</title>
         <link rel="stylesheet" th:href="@{/static/css/normalize.css}">
         <th:block layout:fragment="custom_css"></th:block>
     </head>
     <body>
-        <header>
-            <h1>My website</h1>
-        </header>
-
-        <section layout:fragment="content">
-            <p>Page content goes here</p>
-        </section>
-
-        <footer>
-            <p>My footer</p>
-            <p layout:fragment="custom-footer">Custom footer here</p>
-        </footer>
-
+        <th:block layout:fragment="main"></th:block>
+        <script th:src="@{/static/js/common.js}"></script>
+        <th:block layout:fragment="custom_js"></th:block>
     </body>
 </html>

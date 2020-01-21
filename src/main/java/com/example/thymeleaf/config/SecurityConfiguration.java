@@ -27,7 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/**").permitAll();
+            .antMatchers("/**").permitAll()
+            .and()
+            .formLogin()
+            .loginPage("/auth/login")
+            .defaultSuccessUrl("/");
     }
 
     @Bean

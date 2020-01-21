@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -19,11 +21,15 @@ public class AuthService {
         String username = userRequestDto.getUsername();
         String password = userRequestDto.getPassword();
 
-        if (userRepository.findByUsername(username).size() > 0) {
+        if (!userRepository.findByUsername(username).isPresent()) {
             throw new UserException.AlreadyExist(username);
         }
 
         User user = User.create(username, bCryptPasswordEncoder.encode(password));
         return userRepository.save(user);
+    }
+
+    public User findByUsername(String username) throws AuthenticationException {
+        return userRepository.findByUsername(username).orElseThrow(AuthenticationException::new);
     }
 }

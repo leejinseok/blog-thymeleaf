@@ -31,4 +31,14 @@ public class AuthController {
         authService.saveUser(userRequestDto);
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String getLogin() {
+        return "auth/login";
+    }
+
+    @PostMapping("/login")
+    public String postLogin() {
+        return "redirect:/";
+    }
 }

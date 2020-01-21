@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,12 +19,12 @@ public class UserRepository {
         return user;
     }
 
-    public List<User> findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         String jpql = "select u from User u where u.username = :username";
         TypedQuery<User> query = em.createQuery(jpql, User.class);
         query.setParameter("username", username);
 
-        return query.getResultList();
+        return Optional.ofNullable(query.getSingleResult());
     }
 
 }

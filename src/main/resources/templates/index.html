@@ -1,16 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
 <head>
-    <title>Content page</title>
-    <th:block layout:fragment="custom_css">
-        <link rel="stylesheet" th:href="@{/static/css/index.css}" />
-    </th:block>
+    <title>위메이크 커뮤니티 - 홈</title>
 </head>
-<body>
-<section layout:fragment="content">
-    <p>This is a paragraph from the content page</p>
-</section>
-<footer>
-    <p layout:fragment="custom-footer">This is some footer content from the content page</p>
-</footer>
-</body>
+
+<th:block layout:fragment="custom_css">
+    <link rel="stylesheet" th:href="@{/static/css/index.css}" />
+</th:block>
+
+<th:block layout:fragment="main">
+    <div id="app">
+        <a href="/auth/register">회원가입</a>
+        <a href="/auth/login">로그인</a>
+    </div>
+</th:block>
+
+<th:block layout:fragment="custom_js">
+    <script th:src="@{/static/js/index.js}"></script>
+</th:block>
+
 </html>
