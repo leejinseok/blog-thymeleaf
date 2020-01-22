@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<security.version>5.0.0.RELEASE</security.version>
 	</properties>
 
 	<dependencies>
@@ -37,19 +38,21 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>4.2.4.RELEASE</version>
+			<version>${security.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>4.2.4.RELEASE</version>
+			<version>${security.version}</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>4.2.4.RELEASE</version>
+			<version>${security.version}</version>
 		</dependency>
 
 		<dependency>
