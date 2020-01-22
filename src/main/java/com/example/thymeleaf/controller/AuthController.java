@@ -1,6 +1,5 @@
 package com.example.thymeleaf.controller;
 
-import com.example.thymeleaf.domain.user.User;
 import com.example.thymeleaf.dto.UserRequestDto;
 import com.example.thymeleaf.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/auth")
@@ -27,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @Transactional
-    public String postRegister(@ModelAttribute("userRequestDto") @Valid UserRequestDto userRequestDto) {
+    public String postRegister(@ModelAttribute("userRequestDto") UserRequestDto userRequestDto) {
         authService.saveUser(userRequestDto);
         return "redirect:/";
     }

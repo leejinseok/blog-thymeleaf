@@ -9,8 +9,17 @@ import java.util.Collection;
 @Data
 public class UserDetail implements UserDetails {
 
-    private String username;
+    private String email;
     private String password;
+
+    public UserDetail(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public static UserDetail create(String email, String password) {
+        return new UserDetail(email, password);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

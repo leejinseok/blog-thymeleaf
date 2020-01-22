@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,18 +19,29 @@ public class AuthService {
     private final UserRepository userRepository;
 
     public User saveUser(UserRequestDto userRequestDto) {
+        String email = userRequestDto.getEmail();
         String username = userRequestDto.getUsername();
         String password = userRequestDto.getPassword();
 
-        if (!userRepository.findByUsername(username).isPresent()) {
-            throw new UserException.AlreadyExist(username);
+        if (userRepository.findByUsername(username).size() > 0) {
+            throw new UserException.AlreadyExistNickname(username);
         }
 
-        User user = User.create(username, bCryptPasswordEncoder.encode(password));
+        if (userRepository.findByEmail(email).size() > 0) {
+            throw new UserException.AlreadyExistEmail(username);
+        }
+
+        User user = User.create(email, username, bCryptPasswordEncoder.encode(password));
         return userRepository.save(user);
     }
 
-    public User findByUsername(String username) throws AuthenticationException {
-        return userRepository.findByUsername(username).orElseThrow(AuthenticationException::new);
+
+
+    public List<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public List<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

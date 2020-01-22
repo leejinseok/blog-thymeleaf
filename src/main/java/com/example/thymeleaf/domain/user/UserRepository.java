@@ -19,12 +19,22 @@ public class UserRepository {
         return user;
     }
 
-    public Optional<User> findByUsername(String username) {
+    public List<User> findByUsername(String username) {
         String jpql = "select u from User u where u.username = :username";
         TypedQuery<User> query = em.createQuery(jpql, User.class);
         query.setParameter("username", username);
+        em.close();
 
-        return Optional.ofNullable(query.getSingleResult());
+        return query.getResultList();
+    }
+
+    public List<User> findByEmail(String email) {
+        String jpql = "select u from User u where u.email = :email";
+        TypedQuery<User> query = em.createQuery(jpql, User.class);
+        query.setParameter("email", email);
+
+        em.close();
+        return query.getResultList();
     }
 
 }
