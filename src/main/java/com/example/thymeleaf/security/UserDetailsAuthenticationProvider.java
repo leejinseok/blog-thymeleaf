@@ -1,5 +1,6 @@
 package com.example.thymeleaf.security;
 
+import com.example.thymeleaf.domain.user.UserDetail;
 import com.example.thymeleaf.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

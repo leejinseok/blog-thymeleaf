@@ -5,6 +5,7 @@ import com.example.thymeleaf.domain.user.UserDetail;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             User user = users.get(0);
 
-            return UserDetail.create(user.getEmail(), user.getPassword());
+            return UserDetail.create(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
         } catch (UsernameNotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage());
         }

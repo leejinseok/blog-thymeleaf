@@ -5,20 +5,22 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 public class UserDetail implements UserDetails {
 
     private String email;
     private String password;
+    private List<GrantedAuthority> authorities;
 
-    public UserDetail(String email, String password) {
+    public UserDetail(String email, String password, List<GrantedAuthority> authorities) {
         this.email = email;
         this.password = password;
     }
 
-    public static UserDetail create(String email, String password) {
-        return new UserDetail(email, password);
+    public static UserDetail create(String email, String password, List<GrantedAuthority> authorities) {
+        return new UserDetail(email, password, authorities);
     }
 
     @Override
