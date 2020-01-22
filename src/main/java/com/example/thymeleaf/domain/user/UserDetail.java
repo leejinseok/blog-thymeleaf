@@ -17,6 +17,7 @@ public class UserDetail implements UserDetails {
     public UserDetail(String email, String password, List<GrantedAuthority> authorities) {
         this.email = email;
         this.password = password;
+        this.authorities = authorities;
     }
 
     public static UserDetail create(String email, String password, List<GrantedAuthority> authorities) {
@@ -25,17 +26,17 @@ public class UserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.email;
     }
 
     @Override
