@@ -1,5 +1,6 @@
 package com.example.thymeleaf.config;
 
+import com.example.thymeleaf.security.JwtAuthenticationFilter;
 import com.example.thymeleaf.security.UserDetailsAuthenticationProvider;
 import com.example.thymeleaf.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .loginPage("/auth/login")
             .usernameParameter("username")
             .passwordParameter("password")
-            .defaultSuccessUrl("/");
+            .defaultSuccessUrl("/")
+            .and()
+            .addFilter(jwtAuthenticationFilter());
+    }
+
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter("");
     }
 
     @Bean
