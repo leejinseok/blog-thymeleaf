@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .loginPage("/auth/login")
             .usernameParameter("username")
             .passwordParameter("password")
-            .defaultSuccessUrl("/")
+            .defaultSuccessUrl("/articles")
             .failureHandler(loginFailureHandler())
             .and()
             .addFilter(jwtAuthenticationFilter())

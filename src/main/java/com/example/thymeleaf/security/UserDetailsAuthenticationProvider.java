@@ -18,10 +18,9 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        if (!passwordEncoder.matches(userDetails.getPassword(), usernamePasswordAuthenticationToken.getCredentials().toString())) {
+        if (!passwordEncoder.matches(usernamePasswordAuthenticationToken.getCredentials().toString(), userDetails.getPassword())) {
             throw new AuthException.PasswordNotMatchException();
         }
-
     }
 
     @Override
