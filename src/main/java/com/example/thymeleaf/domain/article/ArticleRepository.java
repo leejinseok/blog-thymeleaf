@@ -1,6 +1,5 @@
 package com.example.thymeleaf.domain.article;
 
-import com.example.thymeleaf.domain.article.Article;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
