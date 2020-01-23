@@ -34,6 +34,7 @@ public class UserRepository {
         query.setParameter("email", email);
 
         em.close();
+
         return query.getResultList();
     }
 

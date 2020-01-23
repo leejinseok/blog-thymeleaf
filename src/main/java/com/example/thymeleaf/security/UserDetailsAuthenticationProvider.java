@@ -1,5 +1,6 @@
 package com.example.thymeleaf.security;
 
+import com.example.thymeleaf.domain.user.AuthException;
 import com.example.thymeleaf.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,9 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+        if (!passwordEncoder.matches(userDetails.getPassword(), usernamePasswordAuthenticationToken.getCredentials().toString())) {
+            throw new AuthException.PasswordNotMatchException();
+        }
 
     }
 
@@ -29,4 +33,5 @@ public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthen
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         return super.authenticate(authentication);
     }
+
 }
