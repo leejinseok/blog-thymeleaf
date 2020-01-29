@@ -37,6 +37,11 @@ public class AuthController {
         return "auth/login";
     }
 
+    @GetMapping("/login/success")
+    public String getLoginSuccess() {
+        return "auth/login/success";
+    }
+
     @PostMapping("/login")
     public String postLogin(Model model, HttpServletRequest request) {
         model.addAttribute("exception", request.getAttribute("exception"));

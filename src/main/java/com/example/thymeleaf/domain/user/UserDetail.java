@@ -10,18 +10,20 @@ import java.util.List;
 @Data
 public class UserDetail implements UserDetails {
 
+    private Long id;
     private String email;
     private String password;
     private List<GrantedAuthority> authorities;
 
-    public UserDetail(String email, String password, List<GrantedAuthority> authorities) {
+    public UserDetail(Long id, String email, String password, List<GrantedAuthority> authorities) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public static UserDetail create(String email, String password, List<GrantedAuthority> authorities) {
-        return new UserDetail(email, password, authorities);
+    public static UserDetail create(Long id, String email, String password, List<GrantedAuthority> authorities) {
+        return new UserDetail(id, email, password, authorities);
     }
 
     @Override

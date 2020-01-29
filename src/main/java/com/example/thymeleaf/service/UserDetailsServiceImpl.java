@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             User user = users.get(0);
 
-            return UserDetail.create(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
+            return UserDetail.create(user.getId(), user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList("ROLE_USER"));
         } catch (UsernameNotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage());
         }

@@ -2,6 +2,7 @@ package com.example.thymeleaf.config;
 
 import com.example.thymeleaf.security.JwtAuthenticationFilter;
 import com.example.thymeleaf.security.LoginFailureHandler;
+import com.example.thymeleaf.security.LoginSuccessHandler;
 import com.example.thymeleaf.security.UserDetailsAuthenticationProvider;
 import com.example.thymeleaf.service.UserDetailsServiceImpl;
 import com.example.thymeleaf.util.JwtUtil;
@@ -46,14 +47,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/auth/login/**").permitAll()
+            .antMatchers("/auth/register").permitAll()
+//            .antMatchers("/articles").permitAll()
+            .antMatchers("/articles").authenticated()
+//            .antMatchers("/articles").hasRole("USER")
             .and()
             .formLogin()
-            .loginPage("/auth/login")
-            .usernameParameter("username")
-            .passwordParameter("password")
-            .defaultSuccessUrl("/articles")
-            .failureHandler(loginFailureHandler())
+                .loginPage("/auth/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+//                .defaultSuccessUrl("/articles")
+                .successHandler(loginSuccessHandler())
+                .failureHandler(loginFailureHandler())
             .and()
             .addFilter(jwtAuthenticationFilter())
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -61,6 +67,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
         return new JwtAuthenticationFilter(authenticationManager(), jwtUtil());
+    }
+
+    public LoginSuccessHandler loginSuccessHandler() {
+        return new LoginSuccessHandler(jwtUtil());
     }
 
     public LoginFailureHandler loginFailureHandler() {
