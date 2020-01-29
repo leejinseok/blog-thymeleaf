@@ -49,20 +49,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/auth/login/**").permitAll()
             .antMatchers("/auth/register").permitAll()
-//            .antMatchers("/articles").permitAll()
             .antMatchers("/articles").authenticated()
-//            .antMatchers("/articles").hasRole("USER")
             .and()
             .formLogin()
                 .loginPage("/auth/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-//                .defaultSuccessUrl("/articles")
-                .successHandler(loginSuccessHandler())
+                .defaultSuccessUrl("/articles")
                 .failureHandler(loginFailureHandler())
             .and()
             .addFilter(jwtAuthenticationFilter())
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
     }
 
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
