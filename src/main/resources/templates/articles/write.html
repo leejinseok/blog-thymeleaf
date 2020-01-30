@@ -1,13 +1,22 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
-    <title>위메이크 커뮤니티 - 게시글</title>
+    <title>위메이크 커뮤니티 - 글쓰기</title>
     <th:block th:include="fragments/header" />
+    <link rel="stylesheet" th:href="@{/static/css/articles/write.css}">
 </head>
 <body>
     <div id="app">
         <form th:action="@{/articles}" method="post">
-            <input type="text" name="title">
+            <div class="row">
+                <input type="text" name="title">
+            </div>
+            <div class="row">
+                <textarea name="content" id="content"></textarea>
+            </div>
+            <div class="row">
+                <button type="submit">확인</button>
+            </div>
         </form>
     </div>
 </body>

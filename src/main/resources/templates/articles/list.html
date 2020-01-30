@@ -7,8 +7,10 @@
 <body>
     <div id="app">
         <article th:each="article : ${articles}">
-            <p th:text="${article.getTitle()}"></p>
+            <a th:text="${article.getTitle()}" th:href="@{/articles/{id}(id=${article.getId()})}" ></a>
         </article>
+
+        <a th:href="@{/articles/write}">글쓰기</a>
         <th:block th:include="fragments/footer"></th:block>
     </div>
 </body>

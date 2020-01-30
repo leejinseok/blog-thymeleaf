@@ -1,7 +1,9 @@
 package com.example.thymeleaf.domain.article;
 
 import com.example.thymeleaf.domain.user.User;
+import com.example.thymeleaf.dto.ArticleRequestDto;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Article {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,5 +33,11 @@ public class Article {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    public Article(ArticleRequestDto requestDto, User user) {
+        this.content = requestDto.getContent();
+        this.title = requestDto.getTitle();
+        this.user = user;
+    }
 
 }

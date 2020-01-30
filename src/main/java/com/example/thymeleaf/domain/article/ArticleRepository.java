@@ -27,4 +27,8 @@ public class ArticleRepository {
 
         return query.getResultList();
     }
+
+    public Article findById(Long id) {
+        return em.find(Article.class, id);
+    }
 }
