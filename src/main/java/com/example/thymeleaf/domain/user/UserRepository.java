@@ -19,10 +19,10 @@ public class UserRepository {
         return user;
     }
 
-    public List<User> findByUsername(String username) {
-        String jpql = "select u from User u where u.username = :username";
+    public List<User> findByUsername(String name) {
+        String jpql = "select u from User u where u.name = :username";
         TypedQuery<User> query = em.createQuery(jpql, User.class);
-        query.setParameter("username", username);
+        query.setParameter("username", name);
         em.close();
 
         return query.getResultList();
