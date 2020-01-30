@@ -1,23 +1,13 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
-
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <title>위메이크 커뮤니티 - 게시글</title>
+    <th:block th:include="fragments/header"></th:block>
 </head>
-
-<th:block layout:fragment="custom_css">
-    <link rel="stylesheet" th:href="@{/static/css/article.css}" />
-</th:block>
-
-<th:block layout:fragment="main">
+<body>
     <div id="app">
-        <div>
-            hello
-        </div>
+        <h1>hello world</h1>
+        <th:block th:include="fragments/footer"></th:block>
     </div>
-</th:block>
-
-<th:block layout:fragment="custom_js">
-    <script th:src="@{/static/js/article.js}"></script>
-</th:block>
-
+</body>
 </html>

@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
-    <title>Good Thymes Virtual Grocery</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>위메이크 커뮤니티 - 회원가입</title>
+    <th:block th:include="fragments/header"></th:block>
+    <link rel="stylesheet" th:href="@{/static/css/register.css}">
 </head>
 <body>
-<form th:action="@{/auth/register}" method="post">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" autofocus="autofocus">
+    <div id="app">
+        <form th:action="@{/auth/register}" method="post">
+            <div class="row">
+                <label for="email">email</label>
+                <input type="text" id="email" name="email" autofocus="autofocus">
+            </div>
 
-    <label for="password">Password</label>
-    <input type="text" id="password" name="password">
 
-    <br>
+            <div class="row">
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password">
+            </div>
 
-    <button type="submit">Register</button>
-</form>
+            <div class="row">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+            </div>
+
+            <br>
+
+            <div class="row">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+
+        <th:block th:include="fragments/footer"></th:block>
+    </div>
 </body>
 </html>

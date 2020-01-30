@@ -3,6 +3,9 @@ package com.example.thymeleaf.controller;
 import com.example.thymeleaf.dto.UserRequestDto;
 import com.example.thymeleaf.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/auth")
@@ -27,7 +32,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @Transactional
-    public String postRegister(@ModelAttribute("userRequestDto") UserRequestDto userRequestDto) {
+    public String postRegister(@ModelAttribute @Valid UserRequestDto userRequestDto) {
         authService.saveUser(userRequestDto);
         return "redirect:/";
     }
@@ -37,9 +42,15 @@ public class AuthController {
         return "auth/login";
     }
 
-    @GetMapping("/login/success")
-    public String getLoginSuccess() {
-        return "auth/login/success";
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+
+        return "redirect:/auth/login";
     }
 
     @PostMapping("/login")

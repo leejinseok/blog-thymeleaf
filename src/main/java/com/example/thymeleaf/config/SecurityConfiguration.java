@@ -46,19 +46,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
+            .logout()
+            .logoutUrl("/auth/logout")
+            .and()
             .authorizeRequests()
             .antMatchers("/auth/login/**").permitAll()
             .antMatchers("/auth/register").permitAll()
-            .antMatchers("/articles").authenticated()
+            .antMatchers("/articles").hasAnyAuthority("ROLE_USER")
             .and()
             .formLogin()
                 .loginPage("/auth/login")
-                .usernameParameter("username")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/articles")
                 .failureHandler(loginFailureHandler())
             .and()
-            .addFilter(jwtAuthenticationFilter())
+//            .addFilter(jwtAuthenticationFilter())
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
     }
 

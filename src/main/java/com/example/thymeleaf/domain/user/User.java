@@ -23,8 +23,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "password")
     private String password;
@@ -38,10 +38,10 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public static User create(String email, String username, String password) {
+    public static User create(String email, String name, String password) {
         User user = new User();
         user.email = email;
-        user.username = username;
+        user.name = name;
         user.password = password;
         return user;
     }

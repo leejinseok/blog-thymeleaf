@@ -19,25 +19,15 @@ public class AuthService {
 
     public User saveUser(UserRequestDto userRequestDto) {
         String email = userRequestDto.getEmail();
-        String username = userRequestDto.getUsername();
         String password = userRequestDto.getPassword();
-
-        if (userRepository.findByUsername(username).size() > 0) {
-            throw new UserException.AlreadyExistNickname(username);
-        }
+        String name = userRequestDto.getName();
 
         if (userRepository.findByEmail(email).size() > 0) {
-            throw new UserException.AlreadyExistEmail(username);
+            throw new UserException.AlreadyExistEmail(email);
         }
 
-        User user = User.create(email, username, bCryptPasswordEncoder.encode(password));
+        User user = User.create(email, name, bCryptPasswordEncoder.encode(password));
         return userRepository.save(user);
-    }
-
-
-
-    public List<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 
     public List<User> findByEmail(String email) {
