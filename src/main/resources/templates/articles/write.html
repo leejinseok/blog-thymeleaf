@@ -6,11 +6,9 @@
 </head>
 <body>
     <div id="app">
-        <h1>hello world</h1>
-        <article th:each="article : ${articles}">
-            <p th:text="${article.getTitle()}"></p>
-        </article>
-        <th:block th:include="fragments/footer"></th:block>
+        <form th:action="@{/articles}" method="post">
+            <input type="text" name="title">
+        </form>
     </div>
 </body>
 </html>
