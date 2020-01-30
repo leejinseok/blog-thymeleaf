@@ -1,6 +1,7 @@
 package com.example.thymeleaf.domain.article;
 
 import com.example.thymeleaf.domain.user.User;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 public class Article {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

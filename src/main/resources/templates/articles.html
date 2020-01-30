@@ -7,6 +7,9 @@
 <body>
     <div id="app">
         <h1>hello world</h1>
+        <article th:each="article : ${articles}">
+            <p th:text="${article.getTitle()}"></p>
+        </article>
         <th:block th:include="fragments/footer"></th:block>
     </div>
 </body>
